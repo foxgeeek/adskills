@@ -41,6 +41,11 @@ Manage campaigns, upload creatives in bulk, detect fatigue, sync audiences, and 
 - [x] `cross rebalance` — efficiency-weighted budget recommendations
 - [x] Google Drive source for `meta upload` (`--drive-folder <url>`)
 - [x] Cross-platform skills under `.claude/skills/cross-platform/`
+
+**Phase 6 — Polishing ✓**
+- [x] Vitest unit tests for pure utilities (36 passing)
+- [x] GitHub Actions CI (Node 20 + 22, typecheck + lint + test)
+- [x] Expanded docs: [architecture.md](docs/architecture.md), [auth-setup.md](docs/auth-setup.md), [CONTRIBUTING.md](CONTRIBUTING.md), LICENSE
 - [ ] LinkedIn Ads (Phase 4)
 - [ ] Cross-platform workflows (Phase 5)
 

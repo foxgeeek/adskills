@@ -25,9 +25,10 @@ export async function scanCreativeFolder(folder: string): Promise<ScannedAsset[]
     const full = join(folder, entry);
     const st = await stat(full);
     if (!st.isFile()) continue;
+    const rawExt = extname(entry);
     out.push({
       path: full,
-      name: basename(entry, ext),
+      name: basename(entry, rawExt),
       sizeBytes: st.size,
       mimeType: mime,
     });

@@ -1,9 +1,8 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
-  "buildCommand": "pnpm --dir site build",
-  "installCommand": "pnpm install && pnpm --dir site install",
+  "buildCommand": "cd site && pnpm install --frozen-lockfile=false && pnpm build",
   "outputDirectory": "site/.next",
-  "devCommand": "pnpm --dir site dev",
-  "ignoreCommand": "git diff --quiet HEAD^ HEAD ./site"
+  "installCommand": "echo skip-root-install",
+  "devCommand": "cd site && pnpm dev"
 }

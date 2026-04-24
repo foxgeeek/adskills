@@ -2,6 +2,7 @@ import 'dotenv/config';
 import prompts from 'prompts';
 import kleur from 'kleur';
 import { runMetaOAuth } from '../core/oauth-meta.js';
+import { runGoogleOAuth } from '../core/oauth-google.js';
 import { putToken } from '../core/auth.js';
 import { logger } from '../core/logger.js';
 
@@ -14,31 +15,27 @@ export async function runInit(): Promise<void> {
     message: 'Which platform to authenticate?',
     choices: [
       { title: 'Meta (Facebook/Instagram)', value: 'meta' },
-      { title: 'Google Ads (Phase 3 — not yet available)', value: 'google', disabled: true },
+      { title: 'Google Ads', value: 'google' },
       { title: 'LinkedIn (Phase 4 — not yet available)', value: 'linkedin', disabled: true },
     ],
   });
 
-  if (platform !== 'meta') {
-    console.log(kleur.yellow('Only Meta OAuth is implemented in Phase 1.'));
-    return;
-  }
+  if (platform === 'meta') return setupMeta();
+  if (platform === 'google') return setupGoogle();
+}
 
+async function setupMeta(): Promise<void> {
   const { accountRef } = await prompts({
     type: 'text',
     name: 'accountRef',
     message: 'Account reference key (e.g. "coldiq")',
     validate: (v: string) => (/^[a-z0-9][a-z0-9_-]*$/i.test(v) ? true : 'alphanumeric, dash, underscore'),
   });
-
   const appId = process.env.META_APP_ID;
   const appSecret = process.env.META_APP_SECRET;
   const redirectUri = process.env.META_REDIRECT_URI ?? 'http://localhost:3000/oauth/meta/callback';
   const port = Number(process.env.OAUTH_CALLBACK_PORT ?? '3000');
-
-  if (!appId || !appSecret) {
-    throw new Error('Set META_APP_ID and META_APP_SECRET in .env first');
-  }
+  if (!appId || !appSecret) throw new Error('Set META_APP_ID and META_APP_SECRET in .env');
 
   const { password } = await prompts({
     type: 'password',
@@ -48,8 +45,7 @@ export async function runInit(): Promise<void> {
   });
 
   const oauth = await runMetaOAuth({ appId, appSecret, redirectUri, port });
-  logger.info('OAuth successful');
-
+  logger.info('Meta OAuth successful');
   await putToken(
     {
       platform: 'meta',
@@ -60,7 +56,46 @@ export async function runInit(): Promise<void> {
     },
     password,
   );
-
   console.log(kleur.green(`\n✓ Token stored as meta.${accountRef}`));
-  console.log(kleur.gray(`  Add this accountRef to config/accounts.json before running commands.`));
+}
+
+async function setupGoogle(): Promise<void> {
+  const { accountRef } = await prompts({
+    type: 'text',
+    name: 'accountRef',
+    message: 'Account reference key (e.g. "coldiq")',
+    validate: (v: string) => (/^[a-z0-9][a-z0-9_-]*$/i.test(v) ? true : 'alphanumeric, dash, underscore'),
+  });
+  const clientId = process.env.GOOGLE_CLIENT_ID;
+  const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+  const developerToken = process.env.GOOGLE_DEVELOPER_TOKEN;
+  const redirectUri = process.env.GOOGLE_REDIRECT_URI ?? 'http://localhost:3000/oauth/google/callback';
+  const port = Number(process.env.OAUTH_CALLBACK_PORT ?? '3000');
+  if (!clientId || !clientSecret || !developerToken) {
+    throw new Error('Set GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_DEVELOPER_TOKEN in .env');
+  }
+
+  const { password } = await prompts({
+    type: 'password',
+    name: 'password',
+    message: 'Password to encrypt the token store (remember this)',
+    validate: (v: string) => (v.length >= 8 ? true : 'min 8 chars'),
+  });
+
+  const oauth = await runGoogleOAuth({ clientId, clientSecret, redirectUri, port });
+  logger.info('Google OAuth successful');
+  await putToken(
+    {
+      platform: 'google',
+      accountRef,
+      accessToken: oauth.accessToken,
+      refreshToken: oauth.refreshToken,
+      expiresAt: Date.now() + oauth.expiresIn * 1000,
+      scope: oauth.scope,
+      createdAt: Date.now(),
+    },
+    password,
+  );
+  console.log(kleur.green(`\n✓ Token stored as google.${accountRef}`));
+  console.log(kleur.gray(`  Remember to add customerId + loginCustomerId to config/accounts.json`));
 }

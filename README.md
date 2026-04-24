@@ -18,9 +18,18 @@ Manage campaigns, upload creatives in bulk, detect fatigue, sync audiences, and 
 - [x] `fatigue-monitor` — CTR decay + frequency cap detection with period-over-period comparison
 - [x] `spend-tracker` — MTD pace, monthly projection, burn alerts with Chart.js trend
 
+**Phase 3 — Google Ads ✓**
+- [x] Google OAuth with refresh token
+- [x] `GoogleAdsClient` via google-ads-api (GAQL queries)
+- [x] `performance-auditor` — period-over-period audit
+- [x] `keyword-analyzer` — QS, IS, CPC analysis
+- [x] `search-terms` — intent classification (PT/EN)
+- [x] `negative-keywords` — mine + optional bulk apply
+
 **Upcoming**
 - [ ] Google Drive source for creatives (Phase 5)
-- [ ] Google Ads (Phase 3)
+- [ ] LinkedIn Ads (Phase 4)
+- [ ] Cross-platform workflows (Phase 5)
 - [ ] LinkedIn Ads (Phase 4)
 - [ ] Cross-platform workflows (Phase 5)
 

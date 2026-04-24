@@ -8,6 +8,10 @@ import { runMetaUpload } from './meta-upload.js';
 import { runMetaAudienceUpload } from './meta-audience.js';
 import { runMetaFatigue } from './meta-fatigue.js';
 import { runMetaSpend } from './meta-spend.js';
+import { runGoogleAudit } from './google-audit.js';
+import { runGoogleKeywords } from './google-keywords.js';
+import { runGoogleSearchTerms } from './google-search-terms.js';
+import { runGoogleNegatives } from './google-negatives.js';
 
 const program = new Command();
 program
@@ -152,6 +156,106 @@ meta
       password,
       configPath: resolve(options.config),
       thresholdsPath: resolve(options.thresholds),
+      reportsDir: resolve(options.reports),
+    });
+  });
+
+const google = program.command('google').description('Google Ads operations');
+
+async function getGooglePassword(): Promise<string> {
+  const { password } = await prompts({
+    type: 'password',
+    name: 'password',
+    message: 'Token store password',
+  });
+  if (!password) process.exit(1);
+  return password;
+}
+
+google
+  .command('audit')
+  .description('Performance audit — current vs previous period')
+  .requiredOption('-a, --account <ref>', 'account reference')
+  .option('--lookback <days>', 'lookback window in days', (v) => Number(v), 30)
+  .option('--config <path>', 'path to accounts.json', 'config/accounts.json')
+  .option('--reports <path>', 'reports output dir', 'reports')
+  .action(async (options) => {
+    const password = await getGooglePassword();
+    await runGoogleAudit({
+      accountRef: options.account,
+      lookbackDays: options.lookback,
+      password,
+      configPath: resolve(options.config),
+      reportsDir: resolve(options.reports),
+    });
+  });
+
+google
+  .command('keywords')
+  .description('Keyword analysis — quality score, impression share, CPC')
+  .requiredOption('-a, --account <ref>', 'account reference')
+  .option('--campaign <id>', 'scope to campaign')
+  .option('--lookback <days>', 'lookback window in days', (v) => Number(v), 30)
+  .option('--config <path>', 'path to accounts.json', 'config/accounts.json')
+  .option('--reports <path>', 'reports output dir', 'reports')
+  .action(async (options) => {
+    const password = await getGooglePassword();
+    await runGoogleKeywords({
+      accountRef: options.account,
+      campaignId: options.campaign,
+      lookbackDays: options.lookback,
+      password,
+      configPath: resolve(options.config),
+      reportsDir: resolve(options.reports),
+    });
+  });
+
+google
+  .command('search-terms')
+  .description('Search term report with intent classification')
+  .requiredOption('-a, --account <ref>', 'account reference')
+  .option('--campaign <id>', 'scope to campaign')
+  .option('--lookback <days>', 'lookback window', (v) => Number(v), 30)
+  .option('--config <path>', 'path to accounts.json', 'config/accounts.json')
+  .option('--reports <path>', 'reports output dir', 'reports')
+  .action(async (options) => {
+    const password = await getGooglePassword();
+    await runGoogleSearchTerms({
+      accountRef: options.account,
+      campaignId: options.campaign,
+      lookbackDays: options.lookback,
+      password,
+      configPath: resolve(options.config),
+      reportsDir: resolve(options.reports),
+    });
+  });
+
+google
+  .command('negatives')
+  .description('Mine negative keyword candidates from search terms')
+  .requiredOption('-a, --account <ref>', 'account reference')
+  .option('--campaign <id>', 'scope to campaign')
+  .option('--lookback <days>', 'lookback window', (v) => Number(v), 30)
+  .option('--min-impressions <n>', 'min impressions to consider', (v) => Number(v), 50)
+  .option('--max-ctr <pct>', 'max CTR %', (v) => Number(v), 1.0)
+  .option('--min-spend <amount>', 'min spend to consider', (v) => Number(v), 5)
+  .option('--apply', 'add negatives to ad group (requires --ad-group)')
+  .option('--ad-group <resource>', 'ad group resource name for --apply')
+  .option('--config <path>', 'path to accounts.json', 'config/accounts.json')
+  .option('--reports <path>', 'reports output dir', 'reports')
+  .action(async (options) => {
+    const password = await getGooglePassword();
+    await runGoogleNegatives({
+      accountRef: options.account,
+      campaignId: options.campaign,
+      lookbackDays: options.lookback,
+      minImpressions: options.minImpressions,
+      maxCtrPct: options.maxCtr,
+      minSpend: options.minSpend,
+      apply: Boolean(options.apply),
+      adGroupResourceName: options.adGroup,
+      password,
+      configPath: resolve(options.config),
       reportsDir: resolve(options.reports),
     });
   });

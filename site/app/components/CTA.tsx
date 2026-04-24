@@ -28,7 +28,7 @@ export function CTA() {
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <a
-              href="https://github.com/your-org/adskills"
+              href="https://github.com/foxgeeek/adskills"
               target="_blank"
               rel="noreferrer"
               className="group inline-flex items-center gap-3 bg-ink-50 hover:bg-jade-300 text-ink-950 font-mono text-sm font-medium px-6 py-3.5 rounded-sm transition-colors"

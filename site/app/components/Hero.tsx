@@ -38,7 +38,7 @@ export function Hero() {
               <span className="text-ink-950/60 group-hover:text-ink-950">→</span>
             </a>
             <a
-              href="https://github.com/your-org/adskills"
+              href="https://github.com/foxgeeek/adskills"
               target="_blank"
               rel="noreferrer"
               className="group inline-flex items-center gap-3 border border-ink-600 hover:border-ink-400 text-ink-100 font-mono text-sm px-5 py-3 rounded-sm transition-colors"

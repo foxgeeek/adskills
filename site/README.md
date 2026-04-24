@@ -38,4 +38,4 @@ pnpm build
 - Single-page landing, no routing
 - All components under `app/components/`, `'use client'` where they use hooks
 - Color tokens defined as Tailwind v4 `@theme` in `app/globals.css`
-- The `your-org/adskills` GitHub URL is a placeholder — swap before publishing
+- GitHub repo: https://github.com/foxgeeek/adskills

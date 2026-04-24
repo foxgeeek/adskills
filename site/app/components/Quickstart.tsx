@@ -12,7 +12,7 @@ export function Quickstart() {
       file: '~/adskills',
       body: [
         { k: 'cmt', tx: t.quickstart.commentInstall },
-        { k: 'cmd', tx: 'git clone https://github.com/your-org/adskills' },
+        { k: 'cmd', tx: 'git clone https://github.com/foxgeeek/adskills' },
         { k: 'cmd', tx: 'cd adskills && pnpm install' },
         { k: 'cmt', tx: '' },
         { k: 'cmt', tx: t.quickstart.commentEnv },

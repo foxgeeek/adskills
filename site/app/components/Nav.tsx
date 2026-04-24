@@ -38,7 +38,7 @@ export function Nav() {
         </Link>
         <LocaleToggle />
         <a
-          href="https://github.com/your-org/adskills"
+          href="https://github.com/foxgeeek/adskills"
           target="_blank"
           rel="noreferrer"
           className="group flex items-center gap-2 px-3 py-1.5 border border-ink-600 hover:border-jade-400 rounded-sm transition-colors"

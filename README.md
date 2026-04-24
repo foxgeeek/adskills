@@ -46,6 +46,7 @@ Manage campaigns, upload creatives in bulk, detect fatigue, sync audiences, and 
 - [x] Vitest unit tests for pure utilities (36 passing)
 - [x] GitHub Actions CI (Node 20 + 22, typecheck + lint + test)
 - [x] Expanded docs: [architecture.md](docs/architecture.md), [auth-setup.md](docs/auth-setup.md), [CONTRIBUTING.md](CONTRIBUTING.md), LICENSE
+- [x] Landing page — Next.js 15 App Router at [site/](site/) (Fraunces + IBM Plex + JetBrains Mono, Tailwind v4)
 - [ ] LinkedIn Ads (Phase 4)
 - [ ] Cross-platform workflows (Phase 5)
 

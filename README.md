@@ -60,10 +60,18 @@ cp config/accounts.example.json config/accounts.json
 
 Fill in `.env` with your Meta App ID/Secret. Edit `config/accounts.json` with your ad account ID.
 
+## Dev
+
+```bash
+pnpm dev          # site + CLI typecheck watch + vitest watch (parallel)
+pnpm dev:site     # landing only (localhost:3000)
+pnpm cli <cmd>    # run the CLI (e.g. pnpm cli init, pnpm cli meta upload ...)
+```
+
 ## Setup — Meta OAuth
 
 ```bash
-pnpm dev init
+pnpm cli init
 ```
 
 Opens browser → Meta login → grant permissions → token saved encrypted at `~/.adskills/tokens.json`.
@@ -71,7 +79,7 @@ Opens browser → Meta login → grant permissions → token saved encrypted at 
 ## Bulk upload creatives (Meta)
 
 ```bash
-pnpm dev meta upload \
+pnpm cli meta upload \
   --account coldiq \
   --folder ./assets/batch-2026-04 \
   --adset 23850123456789 \
@@ -91,7 +99,7 @@ pnpm dev meta upload \
 ## Custom audience from CSV
 
 ```bash
-pnpm dev meta audience \
+pnpm cli meta audience \
   --account coldiq \
   --csv ./leads/abril-hot.csv \
   --name "Hot Leads — Abril 2026"
@@ -102,7 +110,7 @@ PII is hashed client-side (SHA-256, normalized per Meta spec) before leaving the
 ## Fatigue scan
 
 ```bash
-pnpm dev meta fatigue \
+pnpm cli meta fatigue \
   --account coldiq \
   --lookback 7 \
   --ctr-drop 20 \
@@ -114,7 +122,7 @@ Reports ads with CTR drop ≥ 20% vs previous window or frequency ≥ 3.5. Read-
 ## Spend tracker
 
 ```bash
-pnpm dev meta spend \
+pnpm cli meta spend \
   --account coldiq \
   --budget 5000
 ```

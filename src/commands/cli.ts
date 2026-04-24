@@ -16,6 +16,9 @@ import { runLinkedInAudienceUpload } from './linkedin-audience.js';
 import { runLinkedInBidOptimizer } from './linkedin-bids.js';
 import { runLinkedInBulkEdit } from './linkedin-bulk.js';
 import { runLinkedInCreativeStrategist } from './linkedin-creative.js';
+import { runCrmSync } from './crm-sync.js';
+import { runDashboard } from './dashboard.js';
+import { runRebalance } from './rebalance.js';
 
 const program = new Command();
 program
@@ -34,9 +37,11 @@ const meta = program.command('meta').description('Meta (Facebook/Instagram) Ads 
 
 meta
   .command('upload')
-  .description('Bulk upload creatives from a local folder')
+  .description('Bulk upload creatives from a local folder or Google Drive folder')
   .requiredOption('-a, --account <ref>', 'account reference (key in config/accounts.json)')
-  .requiredOption('-f, --folder <path>', 'local folder with creatives')
+  .option('-f, --folder <path>', 'local folder with creatives')
+  .option('--drive-folder <url>', 'Google Drive folder URL (requires Google OAuth with drive.readonly)')
+  .option('--drive-token-ref <ref>', 'token ref for Drive (defaults to google.<account>)')
   .requiredOption('--adset <id>', 'target ad set id')
   .requiredOption('--page <id>', 'facebook page id')
   .requiredOption('--link <url>', 'destination URL')
@@ -60,6 +65,8 @@ meta
     await runMetaUpload({
       accountRef: options.account,
       folder: options.folder,
+      driveFolder: options.driveFolder,
+      driveTokenRef: options.driveTokenRef,
       adSetId: options.adset,
       pageId: options.page,
       linkUrl: options.link,
@@ -361,6 +368,83 @@ linkedin
     await runLinkedInCreativeStrategist({
       accountRef: options.account,
       campaignId: options.campaign,
+      lookbackDays: options.lookback,
+      password,
+      configPath: resolve(options.config),
+      reportsDir: resolve(options.reports),
+    });
+  });
+
+const cross = program.command('cross').description('Cross-platform workflows (Meta + Google + LinkedIn)');
+
+async function getCrossPassword(): Promise<string> {
+  const { password } = await prompts({ type: 'password', name: 'password', message: 'Token store password' });
+  if (!password) process.exit(1);
+  return password;
+}
+
+cross
+  .command('crm-sync')
+  .description('Upload one CSV as custom audience across Meta, Google, LinkedIn')
+  .requiredOption('-a, --account <ref>', 'account reference')
+  .requiredOption('--csv <path>', 'CSV file with PII columns')
+  .requiredOption('--name <name>', 'audience name')
+  .option('--description <text>', 'audience description')
+  .option(
+    '--platforms <list>',
+    'comma-separated: meta,google,linkedin',
+    (v: string) => v.split(',').map((s) => s.trim()),
+    ['meta', 'google', 'linkedin'],
+  )
+  .option('--config <path>', 'path to accounts.json', 'config/accounts.json')
+  .option('--reports <path>', 'reports output dir', 'reports')
+  .option('--dry-run', 'simulate without hitting APIs')
+  .action(async (options) => {
+    const password = await getCrossPassword();
+    await runCrmSync({
+      accountRef: options.account,
+      csvPath: options.csv,
+      audienceName: options.name,
+      description: options.description,
+      platforms: options.platforms as Array<'meta' | 'google' | 'linkedin'>,
+      password,
+      configPath: resolve(options.config),
+      reportsDir: resolve(options.reports),
+      dryRun: Boolean(options.dryRun),
+    });
+  });
+
+cross
+  .command('dashboard')
+  .description('Unified performance dashboard across 3 platforms')
+  .requiredOption('-a, --account <ref>', 'account reference')
+  .option('--lookback <days>', 'lookback window', (v) => Number(v), 30)
+  .option('--config <path>', 'path to accounts.json', 'config/accounts.json')
+  .option('--reports <path>', 'reports output dir', 'reports')
+  .action(async (options) => {
+    const password = await getCrossPassword();
+    await runDashboard({
+      accountRef: options.account,
+      lookbackDays: options.lookback,
+      password,
+      configPath: resolve(options.config),
+      reportsDir: resolve(options.reports),
+    });
+  });
+
+cross
+  .command('rebalance')
+  .description('Recommend budget reallocation based on per-platform CPA efficiency')
+  .requiredOption('-a, --account <ref>', 'account reference')
+  .requiredOption('--budget <amount>', 'total budget to allocate', (v) => Number(v))
+  .option('--lookback <days>', 'lookback window', (v) => Number(v), 30)
+  .option('--config <path>', 'path to accounts.json', 'config/accounts.json')
+  .option('--reports <path>', 'reports output dir', 'reports')
+  .action(async (options) => {
+    const password = await getCrossPassword();
+    await runRebalance({
+      accountRef: options.account,
+      totalBudget: options.budget,
       lookbackDays: options.lookback,
       password,
       configPath: resolve(options.config),

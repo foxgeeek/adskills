@@ -34,9 +34,13 @@ Manage campaigns, upload creatives in bulk, detect fatigue, sync audiences, and 
 - [x] `bulk-editor` — CSV-driven campaign edits (status/budget/bid)
 - [x] `creative-strategist` — format performance + next-test suggestions
 
-**Upcoming**
-- [ ] Google Drive source for creatives (Phase 5)
-- [ ] Cross-platform workflows (Phase 5)
+**Phase 5 — Cross-platform workflows ✓**
+- [x] Google Ads customer match support (`createUserList` + offline user data job)
+- [x] `cross crm-sync` — CSV → Meta + Google + LinkedIn audiences in one run
+- [x] `cross dashboard` — consolidated HTML report (spend/conv share donuts)
+- [x] `cross rebalance` — efficiency-weighted budget recommendations
+- [x] Google Drive source for `meta upload` (`--drive-folder <url>`)
+- [x] Cross-platform skills under `.claude/skills/cross-platform/`
 - [ ] LinkedIn Ads (Phase 4)
 - [ ] Cross-platform workflows (Phase 5)
 

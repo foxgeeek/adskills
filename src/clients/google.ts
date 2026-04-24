@@ -161,6 +161,66 @@ export class GoogleAdsClient {
     }));
   }
 
+  async createUserList(
+    name: string,
+    description: string,
+  ): Promise<{ resourceName: string }> {
+    const result = await this.customer.userLists.create([
+      {
+        name,
+        description,
+        crm_based_user_list: {
+          upload_key_type: 'CONTACT_INFO',
+          data_source_type: 'FIRST_PARTY',
+        },
+        membership_life_span: 10000,
+        membership_status: 'OPEN',
+      },
+    ]);
+    const resourceName = result.results?.[0]?.resource_name;
+    if (!resourceName) throw new Error('Google user list creation returned no resource name');
+    return { resourceName };
+  }
+
+  async addUsersToUserList(
+    userListResourceName: string,
+    hashedUsers: Array<{ email?: string; phone?: string }>,
+  ): Promise<{ jobResourceName: string; submitted: number }> {
+    const customerId = this.opts.customerId.replace(/-/g, '');
+    const jobsApi = this.customer.offlineUserDataJobs as unknown as {
+      createOfflineUserDataJob: (req: unknown) => Promise<{ resource_name?: string }>;
+      addOfflineUserDataJobOperations: (req: unknown) => Promise<unknown>;
+      runOfflineUserDataJob: (req: unknown) => Promise<unknown>;
+    };
+
+    const job = await jobsApi.createOfflineUserDataJob({
+      customer_id: customerId,
+      job: {
+        type: 'CUSTOMER_MATCH_USER_LIST',
+        customer_match_user_list_metadata: { user_list: userListResourceName },
+      },
+    });
+    const jobResourceName = job.resource_name;
+    if (!jobResourceName) throw new Error('Google offline job creation returned no resource name');
+
+    const operations = hashedUsers
+      .map((u) => {
+        const identifiers: Array<{ hashed_email?: string; hashed_phone_number?: string }> = [];
+        if (u.email) identifiers.push({ hashed_email: u.email });
+        if (u.phone) identifiers.push({ hashed_phone_number: u.phone });
+        return identifiers.length ? { create: { user_identifiers: identifiers } } : null;
+      })
+      .filter((op): op is { create: { user_identifiers: Array<Record<string, string>> } } => op !== null);
+
+    await jobsApi.addOfflineUserDataJobOperations({
+      resource_name: jobResourceName,
+      operations,
+      enable_partial_failure: true,
+    });
+    await jobsApi.runOfflineUserDataJob({ resource_name: jobResourceName });
+    return { jobResourceName, submitted: operations.length };
+  }
+
   async addNegativeKeywords(
     adGroupResourceName: string,
     terms: Array<{ text: string; matchType: 'EXACT' | 'PHRASE' | 'BROAD' }>,

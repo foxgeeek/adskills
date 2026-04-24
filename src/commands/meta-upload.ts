@@ -7,12 +7,15 @@ import { MetaClient } from '../clients/meta.js';
 import { getToken } from '../core/auth.js';
 import { logger } from '../core/logger.js';
 import { scanCreativeFolder } from '../utils/scan-folder.js';
+import { downloadDriveFolder } from '../utils/drive-fetcher.js';
 import { renderCreativeTable, writeReport } from '../reporters/html-report.js';
 import { writeMarkdownReport } from '../reporters/markdown-report.js';
 
 export interface MetaUploadOptions {
   accountRef: string;
-  folder: string;
+  folder?: string;
+  driveFolder?: string;
+  driveTokenRef?: string;
   adSetId: string;
   pageId: string;
   linkUrl: string;
@@ -46,7 +49,23 @@ export async function runMetaUpload(opts: MetaUploadOptions): Promise<void> {
     throw new Error(`No token for ${account.meta.tokenRef} — run "adskills init" first`);
   }
 
-  const assets = await scanCreativeFolder(resolve(opts.folder));
+  let sourceFolder = opts.folder ? resolve(opts.folder) : undefined;
+  if (opts.driveFolder) {
+    const driveTokenRef = opts.driveTokenRef ?? `google.${opts.accountRef}`;
+    const driveToken = await getToken(driveTokenRef, opts.password);
+    if (!driveToken) {
+      throw new Error(
+        `Drive download requires Google token at ${driveTokenRef}. Run "adskills init" → Google first.`,
+      );
+    }
+    logger.info(`Fetching Drive folder to temp dir`);
+    const downloaded = await downloadDriveFolder(opts.driveFolder, driveToken.accessToken);
+    sourceFolder = downloaded.dir;
+    logger.info(`Downloaded ${downloaded.files.length} files to ${sourceFolder}`);
+  }
+  if (!sourceFolder) throw new Error('Provide --folder or --drive-folder');
+
+  const assets = await scanCreativeFolder(sourceFolder);
   if (assets.length === 0) {
     logger.warn('No supported assets found (jpg, png, mp4)');
     return;

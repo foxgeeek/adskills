@@ -18,7 +18,10 @@ export interface GoogleOAuthResult {
   scope: string;
 }
 
-const DEFAULT_SCOPES = ['https://www.googleapis.com/auth/adwords'];
+const DEFAULT_SCOPES = [
+  'https://www.googleapis.com/auth/adwords',
+  'https://www.googleapis.com/auth/drive.readonly',
+];
 
 export async function runGoogleOAuth(config: GoogleOAuthConfig): Promise<GoogleOAuthResult> {
   const scopes = config.scopes ?? DEFAULT_SCOPES;

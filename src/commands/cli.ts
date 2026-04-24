@@ -12,6 +12,10 @@ import { runGoogleAudit } from './google-audit.js';
 import { runGoogleKeywords } from './google-keywords.js';
 import { runGoogleSearchTerms } from './google-search-terms.js';
 import { runGoogleNegatives } from './google-negatives.js';
+import { runLinkedInAudienceUpload } from './linkedin-audience.js';
+import { runLinkedInBidOptimizer } from './linkedin-bids.js';
+import { runLinkedInBulkEdit } from './linkedin-bulk.js';
+import { runLinkedInCreativeStrategist } from './linkedin-creative.js';
 
 const program = new Command();
 program
@@ -254,6 +258,110 @@ google
       minSpend: options.minSpend,
       apply: Boolean(options.apply),
       adGroupResourceName: options.adGroup,
+      password,
+      configPath: resolve(options.config),
+      reportsDir: resolve(options.reports),
+    });
+  });
+
+const linkedin = program.command('linkedin').description('LinkedIn Ads operations');
+
+async function getLinkedInPassword(): Promise<string> {
+  const { password } = await prompts({
+    type: 'password',
+    name: 'password',
+    message: 'Token store password',
+  });
+  if (!password) process.exit(1);
+  return password;
+}
+
+linkedin
+  .command('audience')
+  .description('Upload CSV as LinkedIn DMP segment (ABM contacts or companies)')
+  .requiredOption('-a, --account <ref>', 'account reference')
+  .requiredOption('--csv <path>', 'CSV file')
+  .requiredOption('--name <name>', 'audience name')
+  .option('--type <type>', 'USER | COMPANY', 'USER')
+  .option('--description <text>', 'audience description')
+  .option('--config <path>', 'path to accounts.json', 'config/accounts.json')
+  .option('--reports <path>', 'reports output dir', 'reports')
+  .option('--dry-run', 'simulate without hitting LinkedIn API')
+  .action(async (options) => {
+    const password = await getLinkedInPassword();
+    await runLinkedInAudienceUpload({
+      accountRef: options.account,
+      csvPath: options.csv,
+      audienceName: options.name,
+      description: options.description,
+      sourceType: options.type === 'COMPANY' ? 'COMPANY' : 'USER',
+      password,
+      configPath: resolve(options.config),
+      reportsDir: resolve(options.reports),
+      dryRun: Boolean(options.dryRun),
+    });
+  });
+
+linkedin
+  .command('bids')
+  .description('Analyze CTR + conv and suggest bid adjustments (optional --apply)')
+  .requiredOption('-a, --account <ref>', 'account reference')
+  .option('--lookback <days>', 'lookback window', (v) => Number(v), 14)
+  .option('--min-ctr <pct>', 'min CTR % to suggest raise', (v) => Number(v), 0.4)
+  .option('--max-cpc-raise-ratio <n>', 'CPC/bid ratio above which to lower bid', (v) => Number(v), 0.9)
+  .option('--adjust <pct>', 'bid adjustment %', (v) => Number(v), 15)
+  .option('--apply', 'apply suggestions (prompts for confirmation)')
+  .option('--config <path>', 'path to accounts.json', 'config/accounts.json')
+  .option('--reports <path>', 'reports output dir', 'reports')
+  .action(async (options) => {
+    const password = await getLinkedInPassword();
+    await runLinkedInBidOptimizer({
+      accountRef: options.account,
+      lookbackDays: options.lookback,
+      minCtrPct: options.minCtr,
+      maxCpcRaiseRatio: options.maxCpcRaiseRatio,
+      adjustPct: options.adjust,
+      apply: Boolean(options.apply),
+      password,
+      configPath: resolve(options.config),
+      reportsDir: resolve(options.reports),
+    });
+  });
+
+linkedin
+  .command('bulk')
+  .description('Bulk edit campaigns from CSV (columns: campaign_id, status, daily_budget, unit_cost)')
+  .requiredOption('-a, --account <ref>', 'account reference')
+  .requiredOption('--csv <path>', 'CSV with edits')
+  .option('--config <path>', 'path to accounts.json', 'config/accounts.json')
+  .option('--reports <path>', 'reports output dir', 'reports')
+  .option('--dry-run', 'simulate without hitting LinkedIn API')
+  .action(async (options) => {
+    const password = await getLinkedInPassword();
+    await runLinkedInBulkEdit({
+      accountRef: options.account,
+      csvPath: options.csv,
+      password,
+      configPath: resolve(options.config),
+      reportsDir: resolve(options.reports),
+      dryRun: Boolean(options.dryRun),
+    });
+  });
+
+linkedin
+  .command('creatives')
+  .description('Analyze creative format performance and suggest next tests')
+  .requiredOption('-a, --account <ref>', 'account reference')
+  .requiredOption('--campaign <id>', 'campaign id')
+  .option('--lookback <days>', 'lookback window', (v) => Number(v), 30)
+  .option('--config <path>', 'path to accounts.json', 'config/accounts.json')
+  .option('--reports <path>', 'reports output dir', 'reports')
+  .action(async (options) => {
+    const password = await getLinkedInPassword();
+    await runLinkedInCreativeStrategist({
+      accountRef: options.account,
+      campaignId: options.campaign,
+      lookbackDays: options.lookback,
       password,
       configPath: resolve(options.config),
       reportsDir: resolve(options.reports),

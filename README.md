@@ -26,9 +26,16 @@ Manage campaigns, upload creatives in bulk, detect fatigue, sync audiences, and 
 - [x] `search-terms` — intent classification (PT/EN)
 - [x] `negative-keywords` — mine + optional bulk apply
 
+**Phase 4 — LinkedIn Ads ✓**
+- [x] LinkedIn OAuth 2.0 3-legged flow + refresh token
+- [x] `LinkedInClient` (REST v202410, REST.li 2.0 protocol)
+- [x] `audience-builder` — DMP segment from CSV (user or company)
+- [x] `bid-optimizer` — CTR + CPC analysis with optional bulk bid apply
+- [x] `bulk-editor` — CSV-driven campaign edits (status/budget/bid)
+- [x] `creative-strategist` — format performance + next-test suggestions
+
 **Upcoming**
 - [ ] Google Drive source for creatives (Phase 5)
-- [ ] LinkedIn Ads (Phase 4)
 - [ ] Cross-platform workflows (Phase 5)
 - [ ] LinkedIn Ads (Phase 4)
 - [ ] Cross-platform workflows (Phase 5)

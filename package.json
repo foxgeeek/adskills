@@ -7,12 +7,15 @@
     "adskills": "./dist/commands/cli.js"
   },
   "scripts": {
-    "build": "tsc",
     "dev": "concurrently -n site,cli,test -c \"cyan,green,magenta\" --kill-others-on-fail \"pnpm dev:site\" \"pnpm dev:cli\" \"pnpm dev:test\"",
     "dev:site": "pnpm --dir site dev",
     "dev:cli": "tsc --noEmit --watch --preserveWatchOutput",
     "dev:test": "vitest",
     "cli": "tsx src/commands/cli.ts",
+    "build": "pnpm build:cli && pnpm build:site",
+    "build:cli": "tsc",
+    "build:site": "pnpm --dir site build",
+    "start": "pnpm --dir site start",
     "lint": "eslint 'src/**/*.ts'",
     "format": "prettier --write 'src/**/*.ts' '*.md'",
     "test": "vitest run",

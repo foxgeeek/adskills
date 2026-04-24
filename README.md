@@ -68,6 +68,36 @@ pnpm dev:site     # landing only (localhost:3000)
 pnpm cli <cmd>    # run the CLI (e.g. pnpm cli init, pnpm cli meta upload ...)
 ```
 
+## Production build
+
+Two deliverables built independently:
+
+```bash
+pnpm build          # builds both (CLI → dist/, site → site/.next/)
+pnpm build:cli      # tsc only, outputs dist/commands/cli.js
+pnpm build:site     # next build only, outputs site/.next/
+pnpm start          # next start (after build:site)
+```
+
+### CLI in production
+
+After `pnpm build:cli`, `dist/commands/cli.js` is the runnable binary. Publish to npm or symlink globally:
+
+```bash
+pnpm build:cli
+npm link                      # exposes the `adskills` binary globally
+adskills init                 # from any directory
+```
+
+### Site in production
+
+The landing is fully static (`output: "static"` compatible):
+
+- **Vercel / Cloudflare Pages / Netlify** — point at `site/`, build command `pnpm --dir site build`, output `site/.next`
+- **Node self-host** — `pnpm build:site && pnpm start` (defaults to port 3000)
+
+**`pnpm dev` is dev-only** — it runs `next dev` (slow + unoptimized), `tsc --watch` (typecheck only, no emit), and vitest. Never use it to serve production traffic.
+
 ## Setup — Meta OAuth
 
 ```bash

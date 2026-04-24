@@ -175,7 +175,7 @@ const enDraft = {
       { label: '→ auth setup per platform', href: 'https://github.com/foxgeeek/adskills/blob/main/docs/auth-setup.md' },
       { label: '→ contributing', href: 'https://github.com/foxgeeek/adskills/blob/main/CONTRIBUTING.md' },
     ],
-    copyright: 'MIT · 2026 · Leonardo Natércio (foxgeeek)',
+    copyright: 'MIT · 2026 · foxgeeek',
     ship: 'ship it',
   },
 };
@@ -358,7 +358,7 @@ export const pt: Dictionary = {
       { label: '→ setup de auth por plataforma', href: 'https://github.com/foxgeeek/adskills/blob/main/docs/auth-setup.md' },
       { label: '→ contribuindo', href: 'https://github.com/foxgeeek/adskills/blob/main/CONTRIBUTING.md' },
     ],
-    copyright: 'MIT · 2026 · Leonardo Natércio (foxgeeek)',
+    copyright: 'MIT · 2026 · foxgeeek',
     ship: 'manda bala',
   },
 };

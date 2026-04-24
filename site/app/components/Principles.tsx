@@ -6,7 +6,7 @@ export function Principles() {
   const { t } = useLocale();
   return (
     <section className="relative px-6 sm:px-10 lg:px-16 py-24 sm:py-32 border-t border-ink-800">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         <div className="flex items-baseline justify-between gap-4 mb-16">
           <div>
             <div className="flex items-center gap-3 mb-4">

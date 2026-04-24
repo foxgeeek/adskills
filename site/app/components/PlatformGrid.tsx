@@ -66,7 +66,8 @@ export function PlatformGrid() {
   const { t, locale } = useLocale();
 
   return (
-    <section id="skills" className="relative px-6 sm:px-10 py-20 sm:py-28 border-t border-ink-800">
+    <section id="skills" className="relative px-6 sm:px-10 lg:px-16 py-20 sm:py-28 border-t border-ink-800">
+      <div className="max-w-7xl mx-auto">
       <div className="flex items-baseline justify-between gap-4 mb-14">
         <div>
           <div className="flex items-center gap-3 mb-4">
@@ -143,6 +144,7 @@ export function PlatformGrid() {
             </div>
           </article>
         ))}
+      </div>
       </div>
     </section>
   );

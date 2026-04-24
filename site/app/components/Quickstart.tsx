@@ -61,8 +61,8 @@ export function Quickstart() {
   const recipe = recipes[active]!;
 
   return (
-    <section id="quickstart" className="relative px-6 sm:px-10 py-20 sm:py-28 border-t border-ink-800">
-      <div className="grid grid-cols-12 gap-6 items-start">
+    <section id="quickstart" className="relative px-6 sm:px-10 lg:px-16 py-20 sm:py-28 border-t border-ink-800">
+      <div className="max-w-7xl mx-auto grid grid-cols-12 gap-6 items-start">
         <div className="col-span-12 lg:col-span-4">
           <div className="flex items-center gap-3 mb-4">
             <div className="h-px w-12 bg-jade-400" />

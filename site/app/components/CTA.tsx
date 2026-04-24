@@ -5,7 +5,7 @@ import { useLocale } from '../i18n/LocaleContext';
 export function CTA() {
   const { t } = useLocale();
   return (
-    <section className="relative px-6 sm:px-10 py-24 sm:py-28 border-t border-ink-800">
+    <section className="relative px-6 sm:px-10 lg:px-16 py-24 sm:py-28 border-t border-ink-800">
       <div className="max-w-5xl mx-auto relative">
         <div className="absolute inset-0 bg-gradient-to-br from-jade-500/15 via-transparent to-amber-400/10 blur-3xl pointer-events-none" />
 

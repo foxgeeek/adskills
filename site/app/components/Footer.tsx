@@ -5,7 +5,8 @@ import { useLocale } from '../i18n/LocaleContext';
 export function Footer() {
   const { t } = useLocale();
   return (
-    <footer className="relative px-6 sm:px-10 pt-12 pb-10 border-t border-ink-800">
+    <footer className="relative px-6 sm:px-10 lg:px-16 pt-12 pb-10 border-t border-ink-800">
+      <div className="max-w-7xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
         <div className="md:col-span-5">
           <div className="font-[family-name:var(--font-fraunces)] text-2xl tracking-tight text-ink-100">
@@ -55,6 +56,7 @@ export function Footer() {
           <span className="h-1 w-1 rounded-full bg-ink-600" />
           <span className="text-jade-400">{t.footer.ship}</span>
         </div>
+      </div>
       </div>
     </footer>
   );

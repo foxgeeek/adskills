@@ -7,7 +7,7 @@ import { LocaleToggle } from './LocaleToggle';
 export function Nav() {
   const { t } = useLocale();
   return (
-    <header className="relative z-10 px-6 sm:px-10 pt-6 pb-4 flex items-center justify-between">
+    <header className="relative z-10 px-6 sm:px-10 lg:px-16 pt-6 pb-4 max-w-7xl mx-auto flex items-center justify-between">
       <div className="flex items-baseline gap-3">
         <span className="font-[family-name:var(--font-fraunces)] text-2xl tracking-tight text-ink-100">
           adskills<span className="text-jade-400">.</span>

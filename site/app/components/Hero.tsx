@@ -5,8 +5,8 @@ import { useLocale } from '../i18n/LocaleContext';
 export function Hero() {
   const { t } = useLocale();
   return (
-    <section className="relative px-6 sm:px-10 pt-10 pb-20 sm:pt-20 sm:pb-28 halo">
-      <div className="grid grid-cols-12 gap-6">
+    <section className="relative px-6 sm:px-10 lg:px-16 pt-10 pb-20 sm:pt-20 sm:pb-28 halo">
+      <div className="max-w-7xl mx-auto grid grid-cols-12 gap-6">
         <div className="col-span-12 lg:col-span-7">
           <div className="rise" style={{ animationDelay: '100ms' }}>
             <div className="flex items-center gap-3 mb-8">

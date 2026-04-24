@@ -1,0 +1,15 @@
+{
+  "fatigue": {
+    "frequencyCap": 3.5,
+    "ctrDropPct": 20,
+    "lookbackDays": 7
+  },
+  "performance": {
+    "minRoas": 2.0,
+    "maxCpaMultiplier": 1.5
+  },
+  "spend": {
+    "dailyBurnAlertPct": 120,
+    "monthlyProjectionAlertPct": 110
+  }
+}

@@ -1,7 +1,7 @@
 {
   "name": "adskills",
   "version": "0.1.0",
-  "description": "Claude Code Skills framework for multi-platform ad ops (Meta, Google, LinkedIn)",
+  "description": "AdSkills — Claude Code Skills framework for multi-platform ad operations (Meta, Google, LinkedIn)",
   "type": "module",
   "bin": {
     "adskills": "./dist/commands/cli.js"

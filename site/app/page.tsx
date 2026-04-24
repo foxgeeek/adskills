@@ -4,7 +4,7 @@ import { Marquee } from './components/Marquee';
 import { PlatformGrid } from './components/PlatformGrid';
 import { Quickstart } from './components/Quickstart';
 import { Architecture } from './components/Architecture';
-import { Testimonial } from './components/Testimonial';
+import { Principles } from './components/Principles';
 import { CTA } from './components/CTA';
 import { Footer } from './components/Footer';
 
@@ -17,7 +17,7 @@ export default function Home() {
       <PlatformGrid />
       <Quickstart />
       <Architecture />
-      <Testimonial />
+      <Principles />
       <CTA />
       <Footer />
     </main>

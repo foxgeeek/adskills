@@ -9,7 +9,7 @@ description: Detect Meta Ads creative fatigue before CTR collapses. Compares cur
 
 - "Identifica criativos com fadiga nos últimos 7 dias"
 - "Quais anúncios tão queimando a audiência?"
-- "Check frequency cap breaches in the coldiq account"
+- "Check frequency cap breaches in the acme account"
 - "CTR dropping ads — last 14 days"
 
 ## Inputs
@@ -42,7 +42,7 @@ For each ad:
 
 ```bash
 adskills meta fatigue \
-  --account coldiq \
+  --account acme \
   --lookback 7 \
   --ctr-drop 20 \
   --frequency 3.5

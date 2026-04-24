@@ -1,19 +1,19 @@
 {
-  "coldiq": {
-    "label": "ColdIQ — main account",
+  "acme": {
+    "label": "Acme — main account",
     "meta": {
       "adAccountId": "act_XXXXXXXXXXXXXXX",
       "businessId": "",
-      "tokenRef": "meta.coldiq"
+      "tokenRef": "meta.acme"
     },
     "google": {
       "customerId": "XXX-XXX-XXXX",
       "loginCustomerId": "",
-      "tokenRef": "google.coldiq"
+      "tokenRef": "google.acme"
     },
     "linkedin": {
       "accountId": "urn:li:sponsoredAccount:XXXXXXXXX",
-      "tokenRef": "linkedin.coldiq"
+      "tokenRef": "linkedin.acme"
     }
   }
 }

@@ -22,7 +22,7 @@ const recipes = [
     body: [
       { k: 'cmt', t: '# scan folder, preview, confirm, upload as PAUSED' },
       { k: 'cmd', t: 'adskills meta upload \\' },
-      { k: 'arg', t: '  --account coldiq \\' },
+      { k: 'arg', t: '  --account acme \\' },
       { k: 'arg', t: '  --folder ./assets/q2-2026 \\' },
       { k: 'arg', t: '  --adset 23850123456789 \\' },
       { k: 'arg', t: '  --page 100012345678 \\' },
@@ -36,7 +36,7 @@ const recipes = [
     body: [
       { k: 'cmt', t: '# upload once, syncs Meta + Google + LinkedIn' },
       { k: 'cmd', t: 'adskills cross crm-sync \\' },
-      { k: 'arg', t: '  --account coldiq \\' },
+      { k: 'arg', t: '  --account acme \\' },
       { k: 'arg', t: '  --csv ./leads/abril-hot.csv \\' },
       { k: 'arg', t: '  --name "Hot Leads — Abril 2026"' },
     ],
@@ -47,7 +47,7 @@ const recipes = [
     body: [
       { k: 'cmt', t: '# flag ads with CTR ↓20% or frequency ≥ 3.5' },
       { k: 'cmd', t: 'adskills meta fatigue \\' },
-      { k: 'arg', t: '  --account coldiq \\' },
+      { k: 'arg', t: '  --account acme \\' },
       { k: 'arg', t: '  --lookback 7' },
     ],
   },

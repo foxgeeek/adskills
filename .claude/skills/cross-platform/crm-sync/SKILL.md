@@ -28,13 +28,13 @@ description: Upload a single CSV of CRM leads/contacts as a custom audience on M
 ## Invocation
 
 ```bash
-adskills cross crm-sync --account coldiq \
+adskills cross crm-sync --account acme \
   --csv ./leads/abril-hot.csv \
   --name "Hot Leads — Abril 2026" \
   --platforms meta,google,linkedin
 
 # Skip LinkedIn
-adskills cross crm-sync --account coldiq --csv ./leads.csv --name "..." \
+adskills cross crm-sync --account acme --csv ./leads.csv --name "..." \
   --platforms meta,google
 ```
 

@@ -24,14 +24,14 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'AdSkills — ad ops, from the terminal',
+  title: 'AdSkills — ad operations, from the terminal',
   description:
-    'Claude Code Skills framework for multi-platform ad operations. Meta, Google, LinkedIn. One prompt, any action.',
+    'AdSkills — Claude Code Skills framework for multi-platform ad operations. Meta, Google, LinkedIn. One prompt, any action.',
   metadataBase: new URL('https://adskills.dev'),
   openGraph: {
-    title: 'AdSkills — ad ops, from the terminal',
+    title: 'AdSkills — ad operations, from the terminal',
     description:
-      'Run Meta, Google, and LinkedIn ad ops from Claude Code via natural language.',
+      'Run Meta, Google, and LinkedIn ad operations from Claude Code via natural language.',
     type: 'website',
   },
 };

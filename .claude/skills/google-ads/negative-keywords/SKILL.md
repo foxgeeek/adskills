@@ -41,10 +41,10 @@ A search term becomes a candidate if **all** hold:
 
 ```bash
 # Report only
-adskills google negatives --account coldiq --lookback 30
+adskills google negatives --account acme --lookback 30
 
 # Apply as EXACT negatives to specific ad group
-adskills google negatives --account coldiq \
+adskills google negatives --account acme \
   --apply --ad-group customers/1234567890/adGroups/9876543210
 ```
 

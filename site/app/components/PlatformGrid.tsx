@@ -63,7 +63,7 @@ export function PlatformGrid() {
             </span>
           </div>
           <h2 className="font-[family-name:var(--font-fraunces)] text-5xl sm:text-6xl leading-[0.98] tracking-[-0.02em] text-ink-50 max-w-2xl">
-            Every tedious ad-ops ritual,{' '}
+            Every tedious ad-operations ritual,{' '}
             <em className="italic font-light text-ink-300">assembled.</em>
           </h2>
         </div>

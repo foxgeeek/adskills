@@ -30,7 +30,7 @@ async function setupLinkedIn(): Promise<void> {
   const { accountRef } = await prompts({
     type: 'text',
     name: 'accountRef',
-    message: 'Account reference key (e.g. "coldiq")',
+    message: 'Account reference key (e.g. "acme")',
     validate: (v: string) => (/^[a-z0-9][a-z0-9_-]*$/i.test(v) ? true : 'alphanumeric, dash, underscore'),
   });
   const clientId = process.env.LINKEDIN_CLIENT_ID;
@@ -70,7 +70,7 @@ async function setupMeta(): Promise<void> {
   const { accountRef } = await prompts({
     type: 'text',
     name: 'accountRef',
-    message: 'Account reference key (e.g. "coldiq")',
+    message: 'Account reference key (e.g. "acme")',
     validate: (v: string) => (/^[a-z0-9][a-z0-9_-]*$/i.test(v) ? true : 'alphanumeric, dash, underscore'),
   });
   const appId = process.env.META_APP_ID;
@@ -105,7 +105,7 @@ async function setupGoogle(): Promise<void> {
   const { accountRef } = await prompts({
     type: 'text',
     name: 'accountRef',
-    message: 'Account reference key (e.g. "coldiq")',
+    message: 'Account reference key (e.g. "acme")',
     validate: (v: string) => (/^[a-z0-9][a-z0-9_-]*$/i.test(v) ? true : 'alphanumeric, dash, underscore'),
   });
   const clientId = process.env.GOOGLE_CLIENT_ID;

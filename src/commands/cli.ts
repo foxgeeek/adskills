@@ -23,7 +23,7 @@ import { runRebalance } from './rebalance.js';
 const program = new Command();
 program
   .name('adskills')
-  .description('Claude Code Skills framework for multi-platform ad ops')
+  .description('AdSkills — Claude Code Skills framework for multi-platform ad operations')
   .version('0.1.0');
 
 program

@@ -8,7 +8,7 @@ description: Track Meta Ads daily spend against a monthly budget. Projects end-o
 ## When to use
 
 - "Como tá o ritmo de gasto do mês?"
-- "Projeta o spend final de Abril na conta coldiq"
+- "Projeta o spend final de Abril na conta acme"
 - "Alguma campanha queimando budget rápido demais?"
 - "Month-to-date spend report"
 
@@ -29,7 +29,7 @@ description: Track Meta Ads daily spend against a monthly budget. Projects end-o
 
 ```bash
 adskills meta spend \
-  --account coldiq \
+  --account acme \
   --budget 5000
 ```
 

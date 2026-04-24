@@ -27,7 +27,7 @@ description: Build LinkedIn DMP segments from CSV for ABM campaigns. Supports US
 ## Invocation
 
 ```bash
-adskills linkedin audience --account coldiq \
+adskills linkedin audience --account acme \
   --csv ./abm/q2-targets.csv \
   --name "Q2 ABM — Enterprise Targets" \
   --type COMPANY

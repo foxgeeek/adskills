@@ -10,13 +10,13 @@ export function Hero() {
             <div className="flex items-center gap-3 mb-8">
               <div className="h-px w-12 bg-jade-400" />
               <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-jade-400">
-                Issue 01 · ad-ops quarterly
+                Issue 01 · adskills quarterly
               </span>
             </div>
           </div>
 
           <h1 className="rise font-[family-name:var(--font-fraunces)] leading-[0.94] tracking-[-0.035em] text-[60px] sm:text-[92px] lg:text-[128px]" style={{ animationDelay: '200ms' }}>
-            <span className="block text-ink-50">Ad ops,</span>
+            <span className="block text-ink-50">Ad operations,</span>
             <span className="block italic font-light text-ink-200">from the</span>
             <span className="block shimmer-text font-medium">terminal.</span>
           </h1>
@@ -105,60 +105,65 @@ function TerminalBlock() {
         <pre className="px-5 py-5 font-mono text-[12.5px] leading-[1.7] text-ink-200 overflow-x-auto">
           <Line delay={900}>
             <Prompt />
-            <span className="text-ink-100">upload creatives from ./q2 to ad set </span>
-            <span className="text-amber-300">23850123456789</span>
+            <span className="text-ink-100">rebalance $8k across platforms for account </span>
+            <span className="text-amber-300">acme</span>
           </Line>
 
           <Line delay={1300}>
             <span className="text-jade-400">›</span>
             <span className="text-ink-300"> invoking skill </span>
-            <span className="text-jade-300 font-medium">meta-ads/creative-strategy</span>
+            <span className="text-jade-300 font-medium">cross-platform/budget-rebalance</span>
           </Line>
 
           <Line delay={1600}>
-            <span className="text-ink-500">  scanned 12 assets · preview ready</span>
+            <span className="text-ink-500">  fetching 30d performance · 3 platforms</span>
           </Line>
 
           <Line delay={1900}>
-            <span className="text-ink-500">  proceed uploading 12 creatives? </span>
-            <span className="text-jade-400">yes</span>
+            <span className="text-ink-500">  </span>
+            <span className="text-ink-300">Meta</span>
+            <span className="text-ink-500">      CPA $14.20 </span>
+            <span className="text-jade-400">efficiency 100%</span>
+          </Line>
+
+          <Line delay={2050}>
+            <span className="text-ink-500">  </span>
+            <span className="text-ink-300">Google</span>
+            <span className="text-ink-500">    CPA $26.80 </span>
+            <span className="text-amber-300">efficiency  53%</span>
           </Line>
 
           <Line delay={2200}>
             <span className="text-ink-500">  </span>
-            <span className="text-jade-400">✓</span>
-            <span className="text-ink-300"> hero-a.jpg — ad </span>
-            <span className="text-amber-300">23850987654321</span>
+            <span className="text-ink-300">LinkedIn</span>
+            <span className="text-ink-500">  CPA $51.40 </span>
+            <span className="text-rose-300">efficiency  28%</span>
           </Line>
 
-          <Line delay={2350}>
+          <Line delay={2400}>
+            <span className="text-ink-500">  ────────────────────────────────</span>
+          </Line>
+
+          <Line delay={2550}>
+            <span className="text-ink-500">  </span>
+            <span className="text-jade-400">→</span>
+            <span className="text-ink-300"> shift </span>
+            <span className="text-jade-300">+$1,840</span>
+            <span className="text-ink-400"> from LinkedIn to Meta</span>
+          </Line>
+
+          <Line delay={2750}>
             <span className="text-ink-500">  </span>
             <span className="text-jade-400">✓</span>
-            <span className="text-ink-300"> hero-b.jpg — ad </span>
-            <span className="text-amber-300">23850987654322</span>
-          </Line>
-
-          <Line delay={2500}>
-            <span className="text-ink-500">  ...</span>
-          </Line>
-
-          <Line delay={2650}>
-            <span className="text-ink-500">  </span>
-            <span className="text-jade-400">✓ Done</span>
-            <span className="text-ink-400"> — 12 ok, 0 failed</span>
-          </Line>
-
-          <Line delay={2800}>
-            <span className="text-ink-500">  </span>
-            <span className="text-ink-400">html: </span>
+            <span className="text-ink-400"> report </span>
             <span className="text-ink-300 underline decoration-dotted decoration-ink-500">
-              reports/meta-ads/creative-strategy/2026-04-24.html
+              reports/cross-ads/budget-rebalance/
             </span>
           </Line>
 
-          <Line delay={3100}>
+          <Line delay={3050}>
             <Prompt />
-            <span className="text-ink-100">fatigue scan last 7 days in coldiq account</span>
+            <span className="text-ink-100">negative-keyword mine last 14 days</span>
             <span className="caret" />
           </Line>
         </pre>

@@ -22,7 +22,7 @@ Gate into all Meta Ads operations. Sub-skills:
 
 Every Meta operation needs an `accountRef` (key in `config/accounts.json`). If user's prompt is ambiguous, ask:
 
-> "Which account? (accounts available: coldiq, clienteX, clienteY)"
+> "Which account? (accounts available: acme, clienteX, clienteY)"
 
 ## Destructive action policy
 
@@ -41,7 +41,7 @@ Preview the exact change list and wait for "yes" / "confirma".
 import { MetaClient } from '../../../src/clients/meta.js';
 import { getToken } from '../../../src/core/auth.js';
 
-const token = await getToken('meta.coldiq', sessionPassword);
+const token = await getToken('meta.acme', sessionPassword);
 const client = new MetaClient({
   accessToken: token.accessToken,
   adAccountId: account.meta.adAccountId,

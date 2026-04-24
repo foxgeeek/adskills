@@ -34,10 +34,10 @@ Adjustment amount = `±adjust%` of current unitCost.
 
 ```bash
 # Report only
-adskills linkedin bids --account coldiq
+adskills linkedin bids --account acme
 
 # Apply suggestions
-adskills linkedin bids --account coldiq --apply --adjust 15
+adskills linkedin bids --account acme --apply --adjust 15
 ```
 
 ## Guardrails

@@ -8,7 +8,7 @@ description: Build Meta custom audiences from CSV files (CRM leads, email/phone 
 ## When to use
 
 - "Sobe essa lista CSV como custom audience no Meta"
-- "Cria uma audiência dos leads do CRM na conta coldiq"
+- "Cria uma audiência dos leads do CRM na conta acme"
 - "Upload these WhatsApp contacts as a Meta custom audience"
 - "Bulk hash and upload emails to audience 'Hot Leads Abril'"
 
@@ -23,7 +23,7 @@ description: Build Meta custom audiences from CSV files (CRM leads, email/phone 
 
 ```bash
 adskills meta audience \
-  --account coldiq \
+  --account acme \
   --csv ./leads/abril-hot.csv \
   --name "Hot Leads — Abril 2026" \
   --description "Top-tier leads from CRM exported 2026-04-24"

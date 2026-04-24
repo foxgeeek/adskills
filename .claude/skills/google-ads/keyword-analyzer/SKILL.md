@@ -26,7 +26,7 @@ description: Analyze Google Ads keywords — quality score, impression share, CP
 ## Invocation
 
 ```bash
-adskills google keywords --account coldiq --lookback 30
+adskills google keywords --account acme --lookback 30
 ```
 
 ## Guardrails

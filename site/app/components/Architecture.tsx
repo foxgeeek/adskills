@@ -84,7 +84,7 @@ function DiagramCard() {
           tag="cli"
           tagColor="text-amber-400"
           label="commander"
-          content={<code className="font-mono text-[12px] text-ink-200">adskills meta upload --account coldiq ...</code>}
+          content={<code className="font-mono text-[12px] text-ink-200">adskills meta upload --account acme ...</code>}
           arrow
         />
         <DiagramRow

@@ -9,7 +9,7 @@ export function Footer() {
             adskills<span className="text-jade-400">.</span>
           </div>
           <p className="mt-3 text-sm text-ink-400 max-w-sm leading-relaxed">
-            Ad ops, from the terminal. A Claude Code Skills framework.
+            AdSkills — ad operations, from the terminal. A Claude Code Skills framework.
             Fork it, extend it, rebrand it &mdash; it&rsquo;s yours.
           </p>
         </div>

@@ -33,7 +33,7 @@ description: Extract Google Ads search terms report and classify by intent (comm
 ## Invocation
 
 ```bash
-adskills google search-terms --account coldiq --lookback 30
+adskills google search-terms --account acme --lookback 30
 ```
 
 ## Guardrails

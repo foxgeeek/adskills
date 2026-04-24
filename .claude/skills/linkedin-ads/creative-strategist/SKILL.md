@@ -37,7 +37,7 @@ description: Analyze LinkedIn creative format performance (single image, carouse
 ## Invocation
 
 ```bash
-adskills linkedin creatives --account coldiq --campaign 1234567890 --lookback 30
+adskills linkedin creatives --account acme --campaign 1234567890 --lookback 30
 ```
 
 ## Guardrails

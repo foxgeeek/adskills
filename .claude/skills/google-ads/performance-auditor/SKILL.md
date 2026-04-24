@@ -8,7 +8,7 @@ description: Google Ads period-over-period performance audit. Compares impressio
 ## When to use
 
 - "Faz auditoria dos últimos 30 dias vs 30 dias anteriores"
-- "Como tá a performance do Google Ads da coldiq?"
+- "Como tá a performance do Google Ads da acme?"
 - "Month-over-month audit"
 
 ## Inputs
@@ -25,7 +25,7 @@ description: Google Ads period-over-period performance audit. Compares impressio
 ## Invocation
 
 ```bash
-adskills google audit --account coldiq --lookback 30
+adskills google audit --account acme --lookback 30
 ```
 
 ## Guardrails

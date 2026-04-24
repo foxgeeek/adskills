@@ -1,6 +1,6 @@
 # adskills
 
-Claude Code Skills framework for multi-platform ad ops — Meta, Google, LinkedIn.
+Claude Code Skills framework for multi-platform ad operations — Meta, Google, LinkedIn.
 
 Manage campaigns, upload creatives in bulk, detect fatigue, sync audiences, and audit performance via natural-language prompts in Claude Code.
 
@@ -47,8 +47,6 @@ Manage campaigns, upload creatives in bulk, detect fatigue, sync audiences, and 
 - [x] GitHub Actions CI (Node 20 + 22, typecheck + lint + test)
 - [x] Expanded docs: [architecture.md](docs/architecture.md), [auth-setup.md](docs/auth-setup.md), [CONTRIBUTING.md](CONTRIBUTING.md), LICENSE
 - [x] Landing page — Next.js 15 App Router at [site/](site/) (Fraunces + IBM Plex + JetBrains Mono, Tailwind v4)
-- [ ] LinkedIn Ads (Phase 4)
-- [ ] Cross-platform workflows (Phase 5)
 
 ## Install
 
@@ -110,7 +108,7 @@ Opens browser → Meta login → grant permissions → token saved encrypted at 
 
 ```bash
 pnpm cli meta upload \
-  --account coldiq \
+  --account acme \
   --folder ./assets/batch-2026-04 \
   --adset 23850123456789 \
   --page 100012345678 \
@@ -130,7 +128,7 @@ pnpm cli meta upload \
 
 ```bash
 pnpm cli meta audience \
-  --account coldiq \
+  --account acme \
   --csv ./leads/abril-hot.csv \
   --name "Hot Leads — Abril 2026"
 ```
@@ -141,7 +139,7 @@ PII is hashed client-side (SHA-256, normalized per Meta spec) before leaving the
 
 ```bash
 pnpm cli meta fatigue \
-  --account coldiq \
+  --account acme \
   --lookback 7 \
   --ctr-drop 20 \
   --frequency 3.5
@@ -153,7 +151,7 @@ Reports ads with CTR drop ≥ 20% vs previous window or frequency ≥ 3.5. Read-
 
 ```bash
 pnpm cli meta spend \
-  --account coldiq \
+  --account acme \
   --budget 5000
 ```
 

@@ -26,7 +26,7 @@ description: Consolidated performance dashboard across Meta, Google, and LinkedI
 ## Invocation
 
 ```bash
-adskills cross dashboard --account coldiq --lookback 30
+adskills cross dashboard --account acme --lookback 30
 ```
 
 ## Guardrails

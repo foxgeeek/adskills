@@ -12,7 +12,7 @@ Trigger on prompts like:
 - "Sobe esses criativos da pasta X no Meta"
 - "Cria 10 ads com essas imagens apontando pro ad set Y"
 - "Bulk upload essas imagens + gera 3 variações de copy pra cada"
-- "Upload creatives from ./assets/batch-2026-04/ to account coldiq"
+- "Upload creatives from ./assets/batch-2026-04/ to account acme"
 
 ## Inputs
 
@@ -44,7 +44,7 @@ Use the helper in `src/commands/meta-bulk-upload.ts`:
 
 ```bash
 adskills meta upload \
-  --account coldiq \
+  --account acme \
   --folder ./assets/batch-2026-04 \
   --adset 23850123456789 \
   --page 100012345678 \

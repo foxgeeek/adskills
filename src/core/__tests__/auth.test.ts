@@ -26,13 +26,13 @@ describe('token store (AES-256-GCM)', () => {
     await putToken(
       {
         platform: 'meta',
-        accountRef: 'coldiq',
+        accountRef: 'acme',
         accessToken: 'tok-123',
         createdAt: Date.now(),
       },
       password,
     );
-    const got = await getToken('meta.coldiq', password);
+    const got = await getToken('meta.acme', password);
     expect(got?.accessToken).toBe('tok-123');
   });
 

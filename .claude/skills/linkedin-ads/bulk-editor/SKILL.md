@@ -29,8 +29,8 @@ campaign_id,status,daily_budget,unit_cost
 ## Invocation
 
 ```bash
-adskills linkedin bulk --account coldiq --csv ./edits/pause-underperformers.csv
-adskills linkedin bulk --account coldiq --csv ./edits/raise-budgets.csv --dry-run
+adskills linkedin bulk --account acme --csv ./edits/pause-underperformers.csv
+adskills linkedin bulk --account acme --csv ./edits/raise-budgets.csv --dry-run
 ```
 
 ## Guardrails

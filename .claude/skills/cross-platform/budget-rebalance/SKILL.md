@@ -34,7 +34,7 @@ description: Recommend budget reallocation across Meta, Google, and LinkedIn bas
 ## Invocation
 
 ```bash
-adskills cross rebalance --account coldiq --budget 10000 --lookback 30
+adskills cross rebalance --account acme --budget 10000 --lookback 30
 ```
 
 ## Guardrails

@@ -26,11 +26,11 @@ All three platforms use OAuth 2.0 with localhost callback on port `OAUTH_CALLBAC
 
 ```json
 {
-  "coldiq": {
+  "acme": {
     "meta": {
       "adAccountId": "act_1234567890",
       "businessId": "",
-      "tokenRef": "meta.coldiq"
+      "tokenRef": "meta.acme"
     }
   }
 }
@@ -60,11 +60,11 @@ All three platforms use OAuth 2.0 with localhost callback on port `OAUTH_CALLBAC
 
 ```json
 {
-  "coldiq": {
+  "acme": {
     "google": {
       "customerId": "123-456-7890",
       "loginCustomerId": "111-111-1111",
-      "tokenRef": "google.coldiq"
+      "tokenRef": "google.acme"
     }
   }
 }
@@ -96,10 +96,10 @@ All three platforms use OAuth 2.0 with localhost callback on port `OAUTH_CALLBAC
 
 ```json
 {
-  "coldiq": {
+  "acme": {
     "linkedin": {
       "accountId": "urn:li:sponsoredAccount:123456789",
-      "tokenRef": "linkedin.coldiq"
+      "tokenRef": "linkedin.acme"
     }
   }
 }
@@ -118,8 +118,8 @@ URN prefix is auto-added if you pass a raw numeric ID.
 Each `accountRef` in `config/accounts.json` points to a dedicated `tokenRef`. Running `adskills init` for a new account ref saves a separate token alongside the existing ones in the encrypted store.
 
 ```bash
-adskills init          # → accountRef: coldiq
+adskills init          # → accountRef: acme
 adskills init          # → accountRef: cliente2
-adskills meta audit -a coldiq
+adskills meta audit -a acme
 adskills meta audit -a cliente2
 ```

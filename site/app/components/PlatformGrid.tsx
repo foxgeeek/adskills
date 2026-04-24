@@ -1,16 +1,27 @@
 'use client';
 
-const platforms = [
+import { useLocale } from '../i18n/LocaleContext';
+import type { Locale } from '../i18n/dictionary';
+
+interface Platform {
+  code: 'meta' | 'google' | 'linkedin' | 'cross';
+  label: string;
+  subtitle: string;
+  accent: string;
+  skills: Array<{ name: string; note: { en: string; pt: string } }>;
+}
+
+const platforms: Platform[] = [
   {
     code: 'meta',
     label: 'Meta Ads',
     subtitle: 'Facebook · Instagram',
     accent: '#3b82f6',
     skills: [
-      { name: 'creative-strategy', note: 'bulk upload · copy variations' },
-      { name: 'audience-builder', note: 'CSV → hashed custom audience' },
-      { name: 'fatigue-monitor', note: 'CTR decay · frequency cap' },
-      { name: 'spend-tracker', note: 'MTD pacing · burn alerts' },
+      { name: 'creative-strategy', note: { en: 'bulk upload · copy variations', pt: 'upload em massa · variações de copy' } },
+      { name: 'audience-builder', note: { en: 'CSV → hashed custom audience', pt: 'CSV → custom audience com hash' } },
+      { name: 'fatigue-monitor', note: { en: 'CTR decay · frequency cap', pt: 'queda de CTR · freq cap' } },
+      { name: 'spend-tracker', note: { en: 'MTD pacing · burn alerts', pt: 'pacing do mês · alertas de burn' } },
     ],
   },
   {
@@ -19,10 +30,10 @@ const platforms = [
     subtitle: 'Search · Performance Max',
     accent: '#fbbf24',
     skills: [
-      { name: 'performance-auditor', note: 'period-over-period audit' },
-      { name: 'keyword-analyzer', note: 'QS · impression share · CPC' },
-      { name: 'search-terms', note: 'intent classifier · PT + EN' },
-      { name: 'negative-keywords', note: 'mine + bulk apply EXACT' },
+      { name: 'performance-auditor', note: { en: 'period-over-period audit', pt: 'auditoria período vs período' } },
+      { name: 'keyword-analyzer', note: { en: 'QS · impression share · CPC', pt: 'QS · impression share · CPC' } },
+      { name: 'search-terms', note: { en: 'intent classifier · PT + EN', pt: 'classificador de intenção · PT + EN' } },
+      { name: 'negative-keywords', note: { en: 'mine + bulk apply EXACT', pt: 'mineração + apply EXACT em bulk' } },
     ],
   },
   {
@@ -31,10 +42,10 @@ const platforms = [
     subtitle: 'ABM · Sponsored Content',
     accent: '#38bdf8',
     skills: [
-      { name: 'audience-builder', note: 'DMP segment · USER or COMPANY' },
-      { name: 'bid-optimizer', note: 'CTR / CPC heuristics + apply' },
-      { name: 'bulk-editor', note: 'CSV → status · budget · bid' },
-      { name: 'creative-strategist', note: 'format performance + tests' },
+      { name: 'audience-builder', note: { en: 'DMP segment · USER or COMPANY', pt: 'segmento DMP · USER ou COMPANY' } },
+      { name: 'bid-optimizer', note: { en: 'CTR / CPC heuristics + apply', pt: 'heurísticas CTR / CPC + apply' } },
+      { name: 'bulk-editor', note: { en: 'CSV → status · budget · bid', pt: 'CSV → status · budget · bid' } },
+      { name: 'creative-strategist', note: { en: 'format performance + tests', pt: 'performance por formato + testes' } },
     ],
   },
   {
@@ -43,15 +54,17 @@ const platforms = [
     subtitle: 'Meta ∙ Google ∙ LinkedIn',
     accent: '#34d399',
     skills: [
-      { name: 'crm-sync', note: 'one CSV → three audiences' },
-      { name: 'dashboard', note: 'unified HTML · donut shares' },
-      { name: 'budget-rebalance', note: 'CPA-weighted reallocation' },
-      { name: 'drive-fetch', note: 'Drive folder → meta upload' },
+      { name: 'crm-sync', note: { en: 'one CSV → three audiences', pt: 'um CSV → três audiências' } },
+      { name: 'dashboard', note: { en: 'unified HTML · donut shares', pt: 'HTML unificado · donut de share' } },
+      { name: 'budget-rebalance', note: { en: 'CPA-weighted reallocation', pt: 'realocação ponderada por CPA' } },
+      { name: 'drive-fetch', note: { en: 'Drive folder → meta upload', pt: 'pasta do Drive → meta upload' } },
     ],
   },
 ];
 
 export function PlatformGrid() {
+  const { t, locale } = useLocale();
+
   return (
     <section id="skills" className="relative px-6 sm:px-10 py-20 sm:py-28 border-t border-ink-800">
       <div className="flex items-baseline justify-between gap-4 mb-14">
@@ -59,16 +72,16 @@ export function PlatformGrid() {
           <div className="flex items-center gap-3 mb-4">
             <div className="h-px w-12 bg-amber-400" />
             <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-amber-400">
-              The anatomy · 14 skills
+              {t.platforms.kicker}
             </span>
           </div>
           <h2 className="font-[family-name:var(--font-fraunces)] text-5xl sm:text-6xl leading-[0.98] tracking-[-0.02em] text-ink-50 max-w-2xl">
-            Every tedious ad-operations ritual,{' '}
-            <em className="italic font-light text-ink-300">assembled.</em>
+            {t.platforms.titleA}{' '}
+            <em className="italic font-light text-ink-300">{t.platforms.titleB}</em>
           </h2>
         </div>
         <span className="hidden md:inline font-mono text-[10px] uppercase tracking-[0.3em] text-ink-500 whitespace-nowrap self-end pb-2">
-          §02 · platforms
+          {t.platforms.section}
         </span>
       </div>
 
@@ -109,7 +122,7 @@ export function PlatformGrid() {
                         {s.name}
                       </div>
                       <div className="text-[12px] text-ink-400 leading-snug mt-0.5">
-                        {s.note}
+                        {s.note[locale as Locale]}
                       </div>
                     </div>
                   </div>
@@ -119,7 +132,7 @@ export function PlatformGrid() {
 
             <div className="mt-6 pt-5 border-t border-ink-800 flex items-center justify-between">
               <span className="font-mono text-[10px] text-ink-500 uppercase tracking-widest">
-                .claude/skills/{p.code === 'cross' ? 'cross-platform' : p.code + '-ads'}/
+                {t.platforms.pathPrefix}{p.code === 'cross' ? 'cross-platform' : p.code + '-ads'}/
               </span>
               <span
                 className="font-mono text-xs group-hover:translate-x-0.5 transition-transform"

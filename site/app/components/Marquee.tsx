@@ -1,17 +1,10 @@
 'use client';
 
+import { useLocale } from '../i18n/LocaleContext';
+
 export function Marquee() {
-  const items = [
-    'AES-256-GCM encrypted tokens',
-    'destructive actions require confirmation',
-    'status=PAUSED by default',
-    'SHA-256 PII hashing client-side',
-    'LGPD-friendly',
-    'Node 22 · strict TypeScript',
-    'GAQL · Meta Graph · LinkedIn REST v202410',
-    'Chart.js in the reports',
-  ];
-  const doubled = [...items, ...items];
+  const { t } = useLocale();
+  const doubled = [...t.marquee, ...t.marquee];
 
   return (
     <section className="relative border-y border-ink-800 py-5 overflow-hidden bg-ink-900/30">

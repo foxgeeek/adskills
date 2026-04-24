@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Fraunces, IBM_Plex_Sans, JetBrains_Mono } from 'next/font/google';
+import { LocaleProvider } from './i18n/LocaleContext';
 import './globals.css';
 
 const fraunces = Fraunces({
@@ -45,7 +46,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           html, body { font-family: var(--font-plex); }
         `}</style>
       </head>
-      <body>{children}</body>
+      <body>
+        <LocaleProvider>{children}</LocaleProvider>
+      </body>
     </html>
   );
 }

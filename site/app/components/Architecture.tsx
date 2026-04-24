@@ -1,6 +1,9 @@
 'use client';
 
+import { useLocale } from '../i18n/LocaleContext';
+
 export function Architecture() {
+  const { t } = useLocale();
   return (
     <section id="architecture" className="relative px-6 sm:px-10 py-20 sm:py-28 border-t border-ink-800">
       <div className="grid grid-cols-12 gap-6 items-start">
@@ -8,28 +11,21 @@ export function Architecture() {
           <div className="flex items-center gap-3 mb-4">
             <div className="h-px w-12 bg-amber-400" />
             <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-amber-400">
-              §04 · architecture
+              {t.architecture.kicker}
             </span>
           </div>
           <h2 className="font-[family-name:var(--font-fraunces)] text-5xl sm:text-6xl leading-[0.98] tracking-[-0.02em] text-ink-50">
-            Five layers,{' '}
-            <em className="italic font-light text-ink-300">
-              each minding its business.
-            </em>
+            {t.architecture.titleA}{' '}
+            <em className="italic font-light text-ink-300">{t.architecture.titleB}</em>
           </h2>
           <p className="mt-8 text-ink-300 leading-relaxed max-w-md">
-            <code className="text-jade-300 font-mono">SKILL.md</code> files
-            describe intent in plain markdown. The CLI parses flags and
-            delegates to a command module. Commands orchestrate —
-            clients execute, reporters render.
+            <code className="text-jade-300 font-mono">SKILL.md</code> {t.architecture.body.a}
           </p>
 
           <dl className="mt-10 space-y-5">
-            <Layer index="01" title="skills" body="Plain-English skill docs in .claude/skills/ — Claude Code reads them as instructions." />
-            <Layer index="02" title="cli" body="commander-based argument parsing, interactive prompts, password-protected token unlock." />
-            <Layer index="03" title="commands" body="One file per CLI command. Scan → confirm → batch → report." />
-            <Layer index="04" title="clients" body="Thin, typed wrappers over Graph API, google-ads-api, LinkedIn REST." />
-            <Layer index="05" title="reporters" body="Self-contained HTML via Tailwind + Chart.js CDN, plus a markdown companion." />
+            {t.architecture.layers.map((l) => (
+              <Layer key={l.index} index={l.index} title={l.title} body={l.body} />
+            ))}
           </dl>
         </div>
 
@@ -56,21 +52,23 @@ function Layer({ index, title, body }: { index: string; title: string; body: str
 }
 
 function DiagramCard() {
+  const { t } = useLocale();
+  const d = t.architecture.diagram;
   return (
     <div className="relative">
       <div className="flex items-baseline justify-between mb-3">
         <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-ink-400">
-          layered flow · request lifetime
+          {d.caption}
         </span>
         <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-ink-500">
-          fig. 06
+          {d.fig}
         </span>
       </div>
 
       <div className="ruled border border-ink-700 bg-ink-950 p-8 sm:p-10">
         <DiagramRow
-          label="you, in claude code"
-          content={<span className="italic text-ink-200 font-[family-name:var(--font-fraunces)]">&ldquo;upload q2 creatives and pause fatigued ones&rdquo;</span>}
+          label={d.youLabel}
+          content={<span className="italic text-ink-200 font-[family-name:var(--font-fraunces)]">{d.youContent}</span>}
           arrow
         />
         <DiagramRow
@@ -83,17 +81,22 @@ function DiagramCard() {
         <DiagramRow
           tag="cli"
           tagColor="text-amber-400"
-          label="commander"
-          content={<code className="font-mono text-[12px] text-ink-200">adskills meta upload --account acme ...</code>}
+          label={d.cmdLabel}
+          content={<code className="font-mono text-[12px] text-ink-200">{d.cmdContent}</code>}
           arrow
         />
         <DiagramRow
           tag="cmd"
           tagColor="text-ink-200"
-          label="src/commands/meta-upload.ts"
+          label={d.cmdFileLabel}
           content={
             <span className="font-mono text-[12px] text-ink-400">
-              <span className="text-ink-200">scan</span> · <span className="text-ink-200">prompt</span> · <span className="text-ink-200">batch</span> · <span className="text-ink-200">render</span>
+              {d.cmdFileContent.map((step, i) => (
+                <span key={step}>
+                  {i > 0 && ' · '}
+                  <span className="text-ink-200">{step}</span>
+                </span>
+              ))}
             </span>
           }
           arrow
@@ -101,17 +104,23 @@ function DiagramCard() {
         <DiagramRow
           tag="core"
           tagColor="text-ink-400"
-          label="auth.ts · rate-limiter"
-          content={<span className="font-mono text-[12px] text-ink-400">unlock tokens · throttle calls</span>}
+          label={d.coreLabel}
+          content={<span className="font-mono text-[12px] text-ink-400">{d.coreContent}</span>}
           arrow
         />
         <DiagramRow
           tag="api"
           tagColor="text-rose-300"
-          label="MetaClient"
+          label={d.apiLabel}
           content={
             <span className="font-mono text-[12px] text-ink-400">
-              POST <span className="text-amber-300">/adimages</span>, <span className="text-amber-300">/adcreatives</span>, <span className="text-amber-300">/ads</span>
+              {d.apiPrefix}
+              {d.apiPaths.map((p, i) => (
+                <span key={p}>
+                  {i > 0 && ', '}
+                  <span className="text-amber-300">{p}</span>
+                </span>
+              ))}
             </span>
           }
           arrow
@@ -119,19 +128,15 @@ function DiagramCard() {
         <DiagramRow
           tag="out"
           tagColor="text-jade-300"
-          label="reporters"
-          content={
-            <span className="font-mono text-[12px] text-ink-400">
-              <span className="text-ink-200">.html</span> · <span className="text-ink-200">.md</span> → <span className="text-ink-300 underline decoration-dotted decoration-ink-600">reports/</span>
-            </span>
-          }
+          label={d.outLabel}
+          content={<span className="font-mono text-[12px] text-ink-400">{d.outContent}</span>}
         />
       </div>
 
       <div className="mt-4 grid grid-cols-3 gap-4 text-[11px] font-mono uppercase tracking-widest text-ink-500">
-        <span>Node 22 · strict TS</span>
-        <span className="text-center">no mocks in prod paths</span>
-        <span className="text-right">fail partial, report honest</span>
+        <span>{t.architecture.chips[0]}</span>
+        <span className="text-center">{t.architecture.chips[1]}</span>
+        <span className="text-right">{t.architecture.chips[2]}</span>
       </div>
     </div>
   );
